@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const backgroundStyle = {
-  backgroundColor: "green",
+  backgroundColor: "#333",
   overflow: "hidden"
 };
 
@@ -19,6 +19,27 @@ function Header() {
       <Link href="/profile">
         <a>Profile</a>
       </Link>
+
+      <style jsx>{`
+        a {
+          float: left;
+          color: #f2f2f2;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+        }
+
+        a:hover {
+          background-color: #ddd;
+          color: black;
+        }
+
+        a.active {
+          background-color: #4caf50;
+          color: white;
+        }
+      `}</style>
     </div>
   );
 }
