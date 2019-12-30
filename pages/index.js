@@ -1,14 +1,18 @@
 import Layout from "../components/layout";
-import React, { useState } from "react";
+import React from "react";
+import Context from "../context";
 import Wood from "../components/resources/wood";
 
 function Main() {
-  const [count, setCount] = useState(0);
-  const [progress, setProgress] = useState(0);
-
+  const defaultState = {
+    unassignedWorkers: 1,
+    assignedWorkers: 0
+  };
   return (
     <Layout>
-      <Wood></Wood>
+      <Context.Provider value={defaultState}>
+        <Wood></Wood>
+      </Context.Provider>
     </Layout>
   );
 }
