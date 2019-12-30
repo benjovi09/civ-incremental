@@ -34,8 +34,6 @@ const backgroundStyle = {
 };
 
 function Header() {
-  var d = new Date();
-  var n = `${d.getMonth()}/${d.getDate()}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
