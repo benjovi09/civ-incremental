@@ -3,28 +3,30 @@ import css from "styled-jsx/css";
 import React, { useState, useEffect } from "react";
 
 const linkStyle = css`
-  a {
+  h4 {
+    margin: 0;
     float: left;
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
   }
-  a:hover {
+  h4:hover {
     background-color: #ddd;
     color: black;
   }
 
-  a.active {
+  h4.active {
     background-color: #4caf50;
     color: white;
   }
 
-  p {
+  h6 {
+    margin-right: 1%;
+    margin-top: 5px;
+    float: right;
     color: white;
-    text-align: right;
-    padding-right: 16px;
+    text-align: center;
   }
 `;
 
@@ -49,21 +51,19 @@ function Header() {
   }
 
   return (
-    <div style={backgroundStyle}>
+    <header style={backgroundStyle}>
       <Link href="/">
-        <a>Main</a>
+        <h4>Main</h4>
       </Link>
       <Link href="/options">
-        <a>Options</a>
+        <h4>Options</h4>
       </Link>
       <Link href="/profile">
-        <a>Profile</a>
+        <h4>Profile</h4>
       </Link>
-
-      <p>{date.toLocaleTimeString()}</p>
-
+      <h6>{date.toLocaleTimeString()}</h6>
       <style jsx>{linkStyle}</style>
-    </div>
+    </header>
   );
 }
 
