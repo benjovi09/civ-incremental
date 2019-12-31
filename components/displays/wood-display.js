@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DisplayStyle from "./display-style";
+import Context from "../context";
 
 export default function WoodDisplay() {
+  const context = useContext(Context);
+  const resources = context.resources;
   //TODO: Get saved values from api
   const [wood, setWood] = useState(0);
-  const [woodGatherers, setWoodGatherers] = useState(10);
+  const [woodGatherers, setWoodGatherers] = useState(0);
   const [woodRate, setWoodRate] = useState(50);
   const [woodWorkerEfficiency, setWoodWorkerEffeciency] = useState(0.001);
   const [date, setDate] = useState(Date.now());
@@ -29,10 +32,17 @@ export default function WoodDisplay() {
 
   return (
     <div style={DisplayStyle}>
-      <label>Gatherers: {woodGatherers}</label>
-      <br />
+      <header>
+        <h4>Wood</h4>
+      </header>
+      <text>
+        <ul>
+          <li>Wood: {resources.wood}</li>
+          <li>Gatherers: {woodGatherers} </li>
+        </ul>
+      </text>
       <button onClick={() => setWoodGatherers(woodGatherers + 1)}>
-        Add Wood Worker
+        Add Wood Gatherer
       </button>
     </div>
   );

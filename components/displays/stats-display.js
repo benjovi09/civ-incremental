@@ -7,8 +7,9 @@ export default function StatsDisplay() {
   const resources = context.resources;
   return (
     <div style={DisplayStyle}>
-      stats display!
-      <br />
+      <header>
+        <h4>Statistics</h4>
+      </header>
       <label>resources</label>
       <ul>
         <li>Wood: {resources.wood}</li>
@@ -17,4 +18,3 @@ export default function StatsDisplay() {
     </div>
   );
 }
-
