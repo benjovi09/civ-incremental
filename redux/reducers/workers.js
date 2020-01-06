@@ -16,6 +16,8 @@ export default function(state = initialState, action) {
     case "increment":
       return {
         ...state,
+        unassignedWorkers: state.unassignedWorkers - 1,
+        assignedWorkers: state.assignedWorkers + 1,
         stoneGatherer: {
           ...state.stoneGatherer,
           count: state.stoneGatherer.count + 1
@@ -24,6 +26,8 @@ export default function(state = initialState, action) {
     case "decrement":
       return {
         ...state,
+        unassignedWorkers: state.unassignedWorkers + 1,
+        assignedWorkers: state.assignedWorkers - 1,
         stoneGatherer: {
           ...state.stoneGatherer,
           count: state.stoneGatherer.count - 1

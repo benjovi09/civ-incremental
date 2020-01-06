@@ -6,10 +6,25 @@ export default function StoneWindow() {
   const stoneCount = Math.round(
     useSelector(state => state.resourceReducer.stone)
   );
+  const unassignedWorkerCount = useSelector(
+    state => state.workerReducer.unassignedWorkers
+  );
   const stoneGathererCount = useSelector(
     state => state.workerReducer.stoneGatherer.count
   );
   const dispatch = useDispatch();
+
+  function handleButtonClick(amount) {
+    if (amount > 0) {
+      if (unassignedWorkerCount >= amount) {
+        dispatch({ type: "increment" });
+      }
+    } else if (amount < 0) {
+      if (stoneGathererCount > 0 && stoneGathererCount - amount > 0) {
+        dispatch({ type: "decrement" });
+      }
+    }
+  }
 
   return (
     <div style={mainWindowStyle}>
@@ -20,10 +35,8 @@ export default function StoneWindow() {
         <li>Stone: {stoneCount}</li>
         <li>Gatherers: {stoneGathererCount} </li>
       </ul>
-      <button onClick={() => dispatch({ type: "increment" })}>
-        Add Stone Gatherer
-      </button>
-      <button onClick={() => dispatch({ type: "decrement" })}>
+      <button onClick={() => handleButtonClick(1)}>Add Stone Gatherer</button>
+      <button onClick={() => handleButtonClick(-1)}>
         Remove Stone Gatherer
       </button>
     </div>
