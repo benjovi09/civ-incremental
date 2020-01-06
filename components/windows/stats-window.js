@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { mainWindowStyle } from "./main-window-style";
+import { StateContext } from "../context";
 
 export default function StatsWindow() {
-  const context = useContext(Context);
-  console.log(context);
-  const resources = context.resources;
-  const jobs = context.jobs;
+  const { state, dispatch } = useContext(StateContext);
+  const resources = state.resources;
+  const jobs = state.jobs;
   return (
     <div style={mainWindowStyle}>
       <header>

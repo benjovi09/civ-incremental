@@ -1,19 +1,35 @@
 import Layout from "../components/layout";
-import React, { useState, useReducer } from "react";
-import {StateProvider} from "../components/context";
+import React, { useEffect, useState, useReducer } from "react";
+import { StateContext } from "../components/context";
 import StatsWindow from "../components/windows/stats-window";
 import StoneWindow from "../components/windows/stone-window";
+
 let reducer = (state, action) => {
   switch (action.type) {
     case "increment":
       return {
         ...state,
         jobs: {
+          ...state.jobs,
           stoneGatherer: state.jobs.stoneGatherer + 1
         }
       };
     case "decrement":
-      return { ...state, count: state.count - 1 };
+      return {
+        ...state,
+        jobs: {
+          ...state.jobs,
+          stoneGatherer: state.jobs.stoneGatherer - 1
+        }
+      };
+    case "tick":
+      return {
+        ...state,
+        resources: {
+          ...state.resources,
+          stone: action.data.resources.stone
+        }
+      };
     default:
       return;
   }
@@ -34,13 +50,40 @@ function Main() {
     }
   };
 
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    var timerID = setInterval(() => tick(), 1000);
+
+    return function cleanup() {
+      clearInterval(timerID);
+    };
+  });
+
+  function tick() {
+    const newDate = new Date();
+
+    const tik = {
+      resources: {
+        stone: state.resources.stone + getStone(newDate - date)
+      }
+    };
+    setDate(newDate);
+    dispatch({ type: "tick", data: tik });
+  }
+
+  function getStone(tick) {
+    return tick * state.jobs.stoneGatherer;
+  }
+
   const [state, dispatch] = useReducer(reducer, userState);
-  
+
   return (
     <Layout>
-      <StateProvider initialState={userState} reducer={reducer}>
+      <StateContext.Provider value={{ state, dispatch }}>
+        <StatsWindow></StatsWindow>
         <StoneWindow></StoneWindow>
-      </StateProvider>
+      </StateContext.Provider>
     </Layout>
   );
 }

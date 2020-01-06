@@ -1,25 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { mainWindowStyle } from "./main-window-style";
-import { useStateValue } from "../context";
-
-function setState(state) {
-  console.log(state);
-}
+import { StateContext } from "../context";
 
 export default function StoneWindow() {
-  const [{ state }, dispatch] = useStateValue();
-  debugger;
-  const handleButtonClick = amount => {
-    if (state.jobs.unassignedWorkers > amount) {
-      setState({
-        ...state,
-        jobs: {
-          unassignedWorkers: state.jobs.unassignedWorkers,
-          stoneGatherer: amount
-        }
-      });
-    }
-  };
+  const { state, dispatch } = useContext(StateContext);
 
   return (
     <div style={mainWindowStyle}>
@@ -27,8 +11,8 @@ export default function StoneWindow() {
         <h4>Stone</h4>
       </header>
       <ul>
-        <li>Stone: {1}</li>
-        <li>Gatherers: {2} </li>
+        <li>Stone: {state.resources.stone}</li>
+        <li>Gatherers: {state.jobs.stoneGatherer} </li>
       </ul>
       <button onClick={() => dispatch({ type: "increment" })}>
         Add Stone Gatherer
