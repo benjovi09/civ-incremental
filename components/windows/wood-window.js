@@ -14,7 +14,7 @@ export default function WoodWindow() {
       </header>
       <text>
         <ul>
-          <li>Wood: {resources.wood}</li>
+          <li>Wood: {resources.wood.amount}</li>
           <li>Gatherers: {WoodGathererCount} </li>
         </ul>
       </text>

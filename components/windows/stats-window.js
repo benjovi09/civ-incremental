@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { mainWindowStyle } from "./main-window-style";
-import { StateContext } from "../context";
+import { useSelector } from "react-redux";
 
 export default function StatsWindow() {
-  const { state, dispatch } = useContext(StateContext);
-  const resources = state.resources;
-  const jobs = state.jobs;
+  const resources = useSelector(state => state.resourceReducer);
+  const jobs = useSelector(state => state.workerReducer);
+
   return (
     <div style={mainWindowStyle}>
       <header>
@@ -13,8 +13,8 @@ export default function StatsWindow() {
       </header>
       <label>resources</label>
       <ul>
-        <li>Wood: {resources.wood}</li>
-        <li>Stone: {resources.stone}</li>
+        <li>Wood: {Math.round(resources.wood)}</li>
+        <li>Stone: {Math.round(resources.stone)}</li>
       </ul>
       <label>Workers</label>
       <ul>
@@ -22,8 +22,8 @@ export default function StatsWindow() {
           Assignable: {jobs.unassignedWorkers}/
           {jobs.assignedWorkers + jobs.unassignedWorkers}
         </li>
-        <li>Wood Gatherer: {jobs.woodGatherer}</li>
-        <li>Stone Gatherer: {jobs.stoneGatherer}</li>
+        <li>Wood Gatherer: {jobs.woodGatherer.count}</li>
+        <li>Stone Gatherer: {jobs.stoneGatherer.count}</li>
       </ul>
     </div>
   );
