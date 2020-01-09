@@ -4,15 +4,13 @@ import store from "../redux/store";
 
 import Ticker from "../components/ticker";
 import Layout from "../components/layout";
-import StatsWindow from "../components/windows/stats-window";
-import StoneWindow from "../components/windows/stone-window";
+import WindowContainer from "../components/windows/window-container";
 
 function Main() {
   return (
     <Provider store={store}>
       <Layout>
-        <StatsWindow></StatsWindow>
-        <StoneWindow></StoneWindow>
+        <WindowContainer></WindowContainer>
       </Layout>
       <Ticker></Ticker>
     </Provider>

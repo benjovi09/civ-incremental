@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 import { mainWindowStyle } from "./main-window-style";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function StoneWindow() {
+export default function ResourceWindow(resource) {
   const stoneCount = Math.round(
     useSelector(state => state.resourceReducer.stone)
   );
   const unassignedWorkerCount = useSelector(
     state => state.workerReducer.unassignedWorkers
   );
-  const stoneGathererCount = useSelector(
+  const gathererCount = useSelector(
     state => state.workerReducer.stoneGatherer.count
   );
   const dispatch = useDispatch();
@@ -20,24 +20,24 @@ export default function StoneWindow() {
         dispatch({ type: "increment" });
       }
     } else if (amount < 0) {
-      if (stoneGathererCount > 0 && stoneGathererCount - amount > 0) {
+      if (gathererCount > 0 && gathererCount - amount > 0) {
         dispatch({ type: "decrement" });
       }
     }
   }
-
+debugger;
   return (
     <div style={mainWindowStyle}>
       <header>
-        <h4>Stone</h4>
+        <h4>{ resource.name }</h4>
       </header>
       <ul>
-        <li>Stone: {stoneCount}</li>
-        <li>Gatherers: {stoneGathererCount} </li>
+        <li>{ resource.name }: {stoneCount}</li>
+        <li>Gatherers: {gathererCount} </li>
       </ul>
-      <button onClick={() => handleButtonClick(1)}>Add Stone Gatherer</button>
+      <button onClick={() => handleButtonClick(1)}>Add { resource.name } Gatherer</button>
       <button onClick={() => handleButtonClick(-1)}>
-        Remove Stone Gatherer
+        Remove { resource.name } Gatherer
       </button>
     </div>
   );

@@ -3,11 +3,11 @@ const initialState = {
   assignedWorkers: 0,
   woodGatherer: {
     count: 0,
-    efficiency: 0.001
+    efficiency: 0.0001
   },
   stoneGatherer: {
     count: 0,
-    efficiency: 0.001
+    efficiency: 0.00005
   }
 };
 
