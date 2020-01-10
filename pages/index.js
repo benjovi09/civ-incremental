@@ -8,12 +8,14 @@ import WindowContainer from "../components/windows/window-container";
 
 function Main() {
   return (
-    <Provider store={store}>
-      <Layout>
-        <WindowContainer></WindowContainer>
-      </Layout>
-      <Ticker></Ticker>
-    </Provider>
+    <main>
+      <Provider store={store}>
+        <Layout>
+          <WindowContainer></WindowContainer>
+        </Layout>
+        <Ticker></Ticker>
+      </Provider>
+    </main>
   );
 }
 

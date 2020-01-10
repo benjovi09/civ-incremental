@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { mainWindowStyle } from "./main-window-style";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,7 +25,7 @@ export default function ResourceWindow(resource) {
       }
     }
   }
-debugger;
+
   return (
     <div style={mainWindowStyle}>
       <header>
