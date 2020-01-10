@@ -5,17 +5,12 @@ import { useSelector } from "react-redux";
 
 export default function WindowContainer() {
   const resources = useSelector(state => state.resourceReducer);
-  console.log(resources);
   return (
     <section aria-label="window-container">
       <StatsWindow></StatsWindow>
-      <ResourceWindow resource={resources} />
+      {resources.map(resource => (
+        <ResourceWindow resource={resource} />
+      ))}
     </section>
   );
 }
-
-
-/*
-      {resources.map(resource => (
-        <ResourceWindow resource={resource} />
-      ))}*/

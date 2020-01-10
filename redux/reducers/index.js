@@ -1,6 +1,10 @@
 import { combineReducers } from "redux";
 import resourceReducer from "./resources";
-import workerReducer from "./workers";
+import professionReducer from "./professions";
 import tickReducer from "./ticker";
 
-export default combineReducers({ tickReducer, resourceReducer, workerReducer });
+export default combineReducers({
+  tickReducer,
+  resourceReducer,
+  professionReducer
+});

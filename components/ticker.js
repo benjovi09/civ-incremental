@@ -18,7 +18,7 @@ export default function Ticker() {
   function tick() {
     const newTick = new Date();
     const elapsedTick = newTick - ticker.tick;
-
+    /*
     const tickStone =
       workers.stoneGatherer.efficiency *
       workers.stoneGatherer.count *
@@ -41,6 +41,7 @@ export default function Ticker() {
         tick: newTick
       }
     });
+  */
   }
 
   return null;

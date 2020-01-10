@@ -1,15 +1,44 @@
-const initialState = {
-  unassignedWorkers: 5,
-  assignedWorkers: 0,
-  woodGatherer: {
-    count: 0,
+export const professionTypes = {
+  PRIMARY: "primary",
+  SUPPORT: "support"
+};
+
+const initialState = [
+  {
+    name: "unemployed",
+    count: 5
+  },
+  {
+    name: "woodGatherer",
+    type: professionTypes.PRIMARY,
+    count: 5,
     efficiency: 0.0001
   },
-  stoneGatherer: {
+  {
+    name: "woodForester",
+    type: professionTypes.SUPPORT,
     count: 0,
-    efficiency: 0.00005
+    efficency: 0.000001
+  },
+  {
+    name: "ironGatherer",
+    type: professionTypes.PRIMARY,
+    count: 1,
+    efficency: 0.00000001
+  },
+  {
+    name: "ironMiner",
+    type: professionTypes.SUPPORT,
+    count: 0,
+    efficency: 0.00000001
+  },
+  {
+    name: "ironToolCrafter",
+    type: professionTypes.PRIMARY,
+    count: 0,
+    efficency: 0.00000001
   }
-};
+];
 
 export default function(state = initialState, action) {
   switch (action.type) {
