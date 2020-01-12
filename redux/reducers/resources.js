@@ -1,19 +1,6 @@
-const initialState = [
-  {
-    name: "wood",
-    count: 50
-  },
-  {
-    name: "iron",
-    count: 10
-  },
-  {
-    name: "ironTool",
-    count: 15
-  }
-];
+import { defaultResources } from "../state";
 
-export default function(state = initialState, action) {
+export default function (state = defaultResources, action) {
   switch (action.type) {
     case "GET_STONE":
       return {

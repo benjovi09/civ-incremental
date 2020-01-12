@@ -6,27 +6,30 @@ export default function StatsWindow() {
   const resources = useSelector(state => state.resourceReducer);
   const professions = useSelector(state => state.professionReducer);
 
+  const unemployedCount = professions.find(p => p.name.toLowerCase() === "unemployed").count;
+  const totalWorkers = professions.map(p => p.count).reduce((t, v) => t + v, 0);
+
+  const professionsElement = professions.map(profession => (
+    <li>
+      {profession.name}: {profession.count}
+    </li>
+  ));
+
+  const workersElement = resources.map(resource => (
+    <li key={resource.name}>
+      {resource.name}: {resource.count}
+    </li>
+  ));
+
   return (
     <div style={mainWindowStyle}>
       <header>
         <h4>Statistics</h4>
       </header>
       <label>resources</label>
-      <ul>
-        {resources.map(resource => (
-          <li>
-            {resource.name}: {resource.count}
-          </li>
-        ))}
-      </ul>
-      <label>Workers</label>
-      <ul>
-        {professions.map(profession => (
-          <li>
-            {profession.name}: {profession.count}
-          </li>
-        ))}
-      </ul>
+      <ul>{workersElement}</ul>
+      <label>Workers: {unemployedCount} / {totalWorkers}</label>
+      <ul>{professionsElement}</ul>
     </div>
   );
 }

@@ -1,13 +1,14 @@
 import React from "react";
 import { mainWindowStyle } from "./main-window-style";
 import { useDispatch, useSelector } from "react-redux";
-import { professionTypes } from "../../redux/reducers/professions";
+import { professionTypes } from "../../enums";
 
 export default function ResourceWindow(resource) {
   resource = resource.resource;
-  const gathererCount = useSelector(state => state.professionReducer).find(
+  const primaryProfession = useSelector(state => state.professionReducer).find(
     p => p.name.includes(resource.name) && p.type === professionTypes.PRIMARY
-  ).count;
+  );
+  const gathererCount = primaryProfession.count;
 
   const unassignedWorkerCount = useSelector(
     state => state.professionReducer
@@ -18,11 +19,11 @@ export default function ResourceWindow(resource) {
   function handleButtonClick(amount) {
     if (amount > 0) {
       if (unassignedWorkerCount >= amount) {
-        dispatch({ type: "increment" });
+        dispatch({ type: "increment", payload: primaryProfession.name });
       }
     } else if (amount < 0) {
       if (gathererCount > 0 && gathererCount - amount > 0) {
-        dispatch({ type: "decrement" });
+        dispatch({ type: "decrement", payload: primaryProfession.name });
       }
     }
   }

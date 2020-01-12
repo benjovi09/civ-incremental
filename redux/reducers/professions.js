@@ -1,67 +1,25 @@
-export const professionTypes = {
-  PRIMARY: "primary",
-  SUPPORT: "support"
-};
+import { defaultProfessions } from "../state";
 
-const initialState = [
-  {
-    name: "unemployed",
-    count: 5
-  },
-  {
-    name: "woodGatherer",
-    type: professionTypes.PRIMARY,
-    count: 5,
-    efficiency: 0.0001
-  },
-  {
-    name: "woodForester",
-    type: professionTypes.SUPPORT,
-    count: 0,
-    efficency: 0.000001
-  },
-  {
-    name: "ironGatherer",
-    type: professionTypes.PRIMARY,
-    count: 1,
-    efficency: 0.00000001
-  },
-  {
-    name: "ironMiner",
-    type: professionTypes.SUPPORT,
-    count: 0,
-    efficency: 0.00000001
-  },
-  {
-    name: "ironToolCrafter",
-    type: professionTypes.PRIMARY,
-    count: 0,
-    efficency: 0.00000001
-  }
-];
-
-export default function(state = initialState, action) {
+export default function(state = defaultProfessions, action) {
   switch (action.type) {
     case "increment":
-      return {
-        ...state,
-        unassignedWorkers: state.unassignedWorkers - 1,
-        assignedWorkers: state.assignedWorkers + 1,
-        stoneGatherer: {
-          ...state.stoneGatherer,
-          count: state.stoneGatherer.count + 1
+      return state.map(p => {
+        if (p.name === action.payload) {
+          p.count++;
+        } else if (p.name === "unemployed") {
+          p.count--;
         }
-      };
+        return p;
+      });
     case "decrement":
-      return {
-        ...state,
-        unassignedWorkers: state.unassignedWorkers + 1,
-        assignedWorkers: state.assignedWorkers - 1,
-        stoneGatherer: {
-          ...state.stoneGatherer,
-          count: state.stoneGatherer.count - 1
+      return state.map(p => {
+        if (p.name === action.payload) {
+          p.count--;
+        } else if (p.name === "unemployed") {
+          p.count++;
         }
-      };
+        return p;
+      });
     default:
       return state;
   }
