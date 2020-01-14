@@ -4,7 +4,22 @@ import { useSelector } from "react-redux";
 
 export default function StatsWindow() {
   const resources = useSelector(state => state.resourceReducer);
-  const jobs = useSelector(state => state.workerReducer);
+  const professions = useSelector(state => state.professionReducer);
+
+  const unemployedCount = professions.find(p => p.name.toLowerCase() === "unemployed").count;
+  const totalWorkers = professions.map(p => p.count).reduce((t, v) => t + v, 0);
+
+  const professionsElement = professions.map(profession => (
+    <li>
+      {profession.name}: {profession.count}
+    </li>
+  ));
+
+  const workersElement = resources.map(resource => (
+    <li key={resource.name}>
+      {resource.name}: {resource.count}
+    </li>
+  ));
 
   return (
     <div style={mainWindowStyle}>
@@ -12,19 +27,9 @@ export default function StatsWindow() {
         <h4>Statistics</h4>
       </header>
       <label>resources</label>
-      <ul>
-        <li>Wood: {Math.round(resources.wood)}</li>
-        <li>Stone: {Math.round(resources.stone)}</li>
-      </ul>
-      <label>Workers</label>
-      <ul>
-        <li>
-          Assignable: {jobs.unassignedWorkers}/
-          {jobs.assignedWorkers + jobs.unassignedWorkers}
-        </li>
-        <li>Wood Gatherer: {jobs.woodGatherer.count}</li>
-        <li>Stone Gatherer: {jobs.stoneGatherer.count}</li>
-      </ul>
+      <ul>{workersElement}</ul>
+      <label>Workers: {unemployedCount} / {totalWorkers}</label>
+      <ul>{professionsElement}</ul>
     </div>
   );
 }
