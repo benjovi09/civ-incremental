@@ -55,3 +55,15 @@ export const defaultProfessions = [
     efficency: 0.00000001
   }
 ];
+
+export const defaultProfessionResources = [
+  {
+    profession: "woodGatherer",
+    resourcesProduced: ["wood"]
+  },
+  {
+    profession: "ironToolCrafter",
+    resourcesProduced: ["ironTool"],
+    resourcesConsumed: ["wood", "iron"]
+  }
+]

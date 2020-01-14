@@ -1,12 +1,25 @@
 import { defaultResources } from "../state";
 
-export default function (state = defaultResources, action) {
+export default function(state = defaultResources, action) {
   switch (action.type) {
-    case "GET_STONE":
-      return {
-        ...state,
-        stone: action.data.resources.stone
-      };
+    case "tick":
+      return state.map(r => {
+        console.log(r);
+        console.log(
+          action.data.resources.find(gr => gr.resourceList?.includes(r.name))
+            ?.resourceTick
+        );
+
+        debugger;
+        return {
+          name: r.name,
+          count:
+            r.count +
+              action.data.resources.find(gr =>
+                gr.resourceList?.includes(r.name)
+              )?.resourceTick || 0
+        };
+      });
     default:
       return state;
   }

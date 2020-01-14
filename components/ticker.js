@@ -4,7 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 export default function Ticker() {
   const ticker = useSelector(state => state.tickReducer);
   const resources = useSelector(state => state.resourceReducer);
-  const workers = useSelector(state => state.workerReducer);
+  const professions = useSelector(state => state.professionReducer);
+  const professionResources = useSelector(
+    state => state.professionResourceReducer
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,31 +22,21 @@ export default function Ticker() {
   function tick() {
     const newTick = new Date();
     const elapsedTick = newTick - ticker.tick;
-    /*
-    const tickStone =
-      workers.stoneGatherer.efficiency *
-      workers.stoneGatherer.count *
-      elapsedTick;
-
-    if (tickStone > 0) {
-      dispatch({
-        type: "GET_STONE",
-        data: {
-          resources: {
-            stone: resources.stone + tickStone
-          }
-        }
-      });
-    }
-
+    const resourcesProduced = professions.map(p => {
+      debugger;
+      return {
+        resourceTick: p.efficiency * p.count * elapsedTick,
+        resourceList: professionResources.find(pr => pr.profession === p.name)
+          ?.resourcesProduced
+      };
+    });
     dispatch({
       type: "tick",
       data: {
-        tick: newTick
+        tick: newTick,
+        resources: resourcesProduced.filter(rp => rp.resourceTick > 0)
       }
     });
-  */
   }
-
   return null;
 }

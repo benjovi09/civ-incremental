@@ -1,8 +1,8 @@
-const initialState = {
+export const defaultTick = {
   tick: 0
 };
 
-export default function(state = initialState, action) {
+export default function(state = defaultTick, action) {
   switch (action.type) {
     case "tick":
       return {
