@@ -1,16 +1,71 @@
-import { professionTypes } from "../enums";
+import { professionTypes, buildingTypes, resourceTypes } from "../enums";
 
 export const defaultTick = {
-  tick: 0
+  tick: new Date()
 };
+
+export const defaultBuildings = [
+  {
+    name: buildingTypes.RESIDENTIAL.HOUSE.WOOD,
+    amount: 5
+  },
+  {
+    name: "blacksmith",
+    type: buildingTypes.COMMERCIAL
+  },
+  {
+    name: buildingTypes.INDUSTRIAL.MINE.WOOD,
+    amount: 0,
+    professionLimits: [
+      {
+        profession: professionTypes.SUPPORT.FORESTER,
+        limitPerBuilding: 4
+      }
+    ],
+    costs: [
+      {
+        name: resourceTypes.STONE,
+        amount: 100
+      },
+      {
+        name: resourceTypes.IRON,
+        amount: 50
+      }
+    ]
+  },
+  {
+    name: buildingTypes.INDUSTRIAL.MINE.IRON,
+    amount: 0,
+    professionLimits: [
+      {
+        profession: professionTypes.SUPPORT.MINER.IRON,
+        limitPerBuilding: 4
+      }
+    ],
+    costs: [
+      {
+        name: resourceTypes.STONE,
+        amount: 250
+      },
+      {
+        name: resourceTypes.WOOD,
+        amount: 500
+      }
+    ]
+  }
+];
 
 export const defaultResources = [
   {
-    name: "wood",
+    name: resourceTypes.WOOD,
     count: 50
   },
   {
-    name: "iron",
+    name: resourceTypes.STONE,
+    count: 25
+  },
+  {
+    name: resourceTypes.IRON,
     count: 10
   },
   {
@@ -21,30 +76,21 @@ export const defaultResources = [
 
 export const defaultProfessions = [
   {
-    name: "unemployed",
+    name: professionTypes.UNEMPLOYED,
     count: 5
   },
   {
-    name: "woodGatherer",
-    type: professionTypes.PRIMARY,
+    name: professionTypes.PRIMARY.GATHERER,
     count: 5,
     efficiency: 0.0001
   },
   {
-    name: "woodForester",
-    type: professionTypes.SUPPORT,
+    name: professionTypes.SUPPORT.FORESTER,
     count: 0,
     efficency: 0.000001
   },
   {
-    name: "ironGatherer",
-    type: professionTypes.PRIMARY,
-    count: 1,
-    efficency: 0.00000001
-  },
-  {
-    name: "ironMiner",
-    type: professionTypes.SUPPORT,
+    name: professionTypes.SUPPORT.MINER.IRON,
     count: 0,
     efficency: 0.00000001
   },
@@ -58,12 +104,39 @@ export const defaultProfessions = [
 
 export const defaultProfessionResources = [
   {
-    profession: "woodGatherer",
-    resourcesProduced: ["wood"]
+    profession: professionTypes.PRIMARY.GATHERER,
+    resourcesProduced: [
+      {
+        name: resourceTypes.WOOD,
+        efficiency: 0.6
+      },
+      {
+        name: resourceTypes.STONE,
+        efficiency: 0.3
+      },
+      {
+        name: resourceTypes.IRON,
+        efficiency: 0.1
+      }
+    ]
   },
   {
     profession: "ironToolCrafter",
-    resourcesProduced: ["ironTool"],
-    resourcesConsumed: ["wood", "iron"]
+    resourcesProduced: [
+      {
+        name: "ironTool",
+        efficiency: 1
+      }
+    ],
+    resourcesConsumed: [
+      {
+        name: resourceTypes.WOOD,
+        efficiency: 0.5
+      },
+      {
+        name: resourceTypes.IRON,
+        efficiency: 0.5
+      }
+    ]
   }
-]
+];
