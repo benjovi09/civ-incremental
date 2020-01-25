@@ -1,7 +1,7 @@
 import { professionTypes } from "../enums";
 
 export const defaultTick = {
-  tick: 0
+  tick: new Date()
 };
 
 export const defaultResources = [
@@ -66,4 +66,4 @@ export const defaultProfessionResources = [
     resourcesProduced: ["ironTool"],
     resourcesConsumed: ["wood", "iron"]
   }
-]
+];

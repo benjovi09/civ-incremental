@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { professionTypes } from "../../enums";
 
 export default function ResourceWindow(resource) {
+  const dispatch = useDispatch();
   resource = resource.resource;
   const primaryProfession = useSelector(state => state.professionReducer).find(
     p => p.name.includes(resource.name) && p.type === professionTypes.PRIMARY
@@ -13,8 +14,6 @@ export default function ResourceWindow(resource) {
   const unassignedWorkerCount = useSelector(
     state => state.professionReducer
   ).find(p => p.name === "unemployed").count;
-
-  const dispatch = useDispatch();
 
   function handleButtonClick(amount) {
     if (amount > 0) {
@@ -35,7 +34,7 @@ export default function ResourceWindow(resource) {
       </header>
       <ul>
         <li>
-          {resource.name}: {resource.count}
+          {resource.name}: {Math.round(resource.count)}
         </li>
         <li>Gatherers: {gathererCount} </li>
       </ul>

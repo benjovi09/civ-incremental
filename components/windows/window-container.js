@@ -4,11 +4,11 @@ import ResourceWindow from "./resource-window";
 import { useSelector } from "react-redux";
 
 export default function WindowContainer() {
-  const resources = useSelector(state => state.resourceReducer);
+  const resourceState = useSelector(state => state.resourceReducer);
   return (
     <section aria-label="window-container">
       <StatsWindow></StatsWindow>
-      {resources.map(resource => (
+      {resourceState.map(resource => (
         <ResourceWindow resource={resource} />
       ))}
     </section>

@@ -1,6 +1,4 @@
-export const defaultTick = {
-  tick: 0
-};
+import { defaultTick } from "../state";
 
 export default function(state = defaultTick, action) {
   switch (action.type) {

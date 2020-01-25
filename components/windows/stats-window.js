@@ -17,7 +17,7 @@ export default function StatsWindow() {
 
   const workersElement = resources.map(resource => (
     <li key={resource.name}>
-      {resource.name}: {resource.count}
+      {resource.name}: {Math.round(resource.count)}
     </li>
   ));
 
