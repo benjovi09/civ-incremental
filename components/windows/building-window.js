@@ -3,5 +3,5 @@ import { useSelector } from "react-redux";
 
 export default function() {
   const buildings = useSelector(state => state.buildingReducer);
-  return <div>hi lol</div>;
+  return <div>BuildingWindow</div>;
 }
