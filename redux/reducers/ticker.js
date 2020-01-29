@@ -1,5 +1,5 @@
 export const defaultTick = {
-  tick: 0
+  tick: new Date()
 };
 
 export default function(state = defaultTick, action) {

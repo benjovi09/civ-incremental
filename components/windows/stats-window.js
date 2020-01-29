@@ -6,7 +6,9 @@ export default function StatsWindow() {
   const resources = useSelector(state => state.resourceReducer);
   const professions = useSelector(state => state.professionReducer);
 
-  const unemployedCount = professions.find(p => p.name.toLowerCase() === "unemployed").count;
+  const unemployedCount = professions.find(
+    p => p.name.toLowerCase() === "unemployed"
+  ).count;
   const totalWorkers = professions.map(p => p.count).reduce((t, v) => t + v, 0);
 
   const professionsElement = professions.map(profession => (
@@ -17,7 +19,7 @@ export default function StatsWindow() {
 
   const workersElement = resources.map(resource => (
     <li key={resource.name}>
-      {resource.name}: {resource.count}
+      {resource.name}: {Math.round(resource.count)}
     </li>
   ));
 
@@ -28,7 +30,9 @@ export default function StatsWindow() {
       </header>
       <label>resources</label>
       <ul>{workersElement}</ul>
-      <label>Workers: {unemployedCount} / {totalWorkers}</label>
+      <label>
+        Workers: {unemployedCount} / {totalWorkers}
+      </label>
       <ul>{professionsElement}</ul>
     </div>
   );
