@@ -1,4 +1,5 @@
 import React from "react";
+import { mainWindowStyle } from "./main-window-style";
 import { useDispatch, useSelector } from "react-redux";
 import { professionTypes } from "../../enums";
 
@@ -7,8 +8,8 @@ export default function ProfessionsWindow() {
 
   const unassignedWorkerCount = useSelector(
     state => state.professionReducer
-  ).find(p => p.name === "unemployed").count;
-  
+  ).find(p => p.name === professionTypes.UNEMPLOYED).count;
+
   const gathererCount = useSelector(state => state.professionReducer).find(
     p => p.name === professionTypes.PRIMARY.GATHERER
   ).count;
@@ -31,7 +32,7 @@ export default function ProfessionsWindow() {
     }
   }
   return (
-    <div>
+    <div style={mainWindowStyle}>
       <button onClick={() => handleButtonClick(1)}>Add Gatherer</button>
       <button onClick={() => handleButtonClick(-1)}>Remove Gatherer</button>
     </div>

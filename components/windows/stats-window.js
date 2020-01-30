@@ -1,13 +1,14 @@
 import React from "react";
 import { mainWindowStyle } from "./main-window-style";
 import { useSelector } from "react-redux";
+import { professionTypes } from "../../enums";
 
 export default function StatsWindow() {
   const resources = useSelector(state => state.resourceReducer);
   const professions = useSelector(state => state.professionReducer);
 
   const unemployedCount = professions.find(
-    p => p.name.toLowerCase() === "unemployed"
+    p => p.name.toLowerCase() === professionTypes.UNEMPLOYED
   ).count;
   const totalWorkers = professions.map(p => p.count).reduce((t, v) => t + v, 0);
 

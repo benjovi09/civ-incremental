@@ -11,6 +11,7 @@ export const defaultBuildings = [
   },
   {
     name: "blacksmith",
+    amount: 0,
     type: buildingTypes.COMMERCIAL
   },
   {
